@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Student {
+  id      String   @id @default(uuid())
+  name    String?  @db.String(255)
+  email   String   @unique @db.String(255)
+  gender  Gender 
+  course  String
+}
